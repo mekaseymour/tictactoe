@@ -5,35 +5,18 @@ theBoard = {1: ' ', 2: ' ', 3: ' ',
             4: ' ', 5: ' ', 6: ' ',
             7: ' ', 8: ' ', 9: ' '}
 
-def printBoard(board):
-    print(board[1] + '|' + board[2] + '|' + board[3])
-    print('-+-+-')
-    print(board[4] + '|' + board[5] + '|' + board[6])
-    print('-+-+-')
-    print(board[7] + '|' + board[8] + '|' + board[9])
-
 def playGame():
-    # ask user to choose to be player 'X' or 'O'
-    player_one = input("Which player would you like to be (X or O)?: ")
-    player_one = player_one.upper()
 
-    # check that the user's entry is either 'X' or 'O'
-    while player_one != 'X' and player_one != 'O':
-        player_one = input("Enter either X or O to start.: ")
-        player_one = player_one.upper()
+    player_one = choosePlayer()
 
     print("OK! Let's play!\n")
+
     printBoard(theBoard)
 
-    # randomly pick which player goes first
-    choice = randint(1,2)
-    if choice == 1:
-        turn = 'X'
-    else:
-        turn = 'O'
+    turn = pickFirstPlayer()
 
     for i in range(9):
-        #print('Turn for ' + turn + '. Move on which space?')
+        #state who's turn it is
         print('Turn for ' + turn + '.')
         if turn != player_one:
             # computer plays
@@ -69,5 +52,33 @@ def playGame():
                 turn = 'O'
             else:
                 turn = 'X'
+
+def printBoard(board):
+    print(board[1] + '|' + board[2] + '|' + board[3])
+    print('-+-+-')
+    print(board[4] + '|' + board[5] + '|' + board[6])
+    print('-+-+-')
+    print(board[7] + '|' + board[8] + '|' + board[9])
+
+def choosePlayer():
+    # ask user to choose to be player 'X' or 'O'
+    player_one = input("Which player would you like to be (X or O)?: ")
+    player_one = player_one.upper()
+
+    # check that the user's entry is either 'X' or 'O'
+    while player_one != 'X' and player_one != 'O':
+        player_one = input("Enter either X or O to start.: ")
+        player_one = player_one.upper()
+
+    return player_one
+
+def pickFirstPlayer():
+    # randomly pick which player goes first
+    choice = randint(1,2)
+    if choice == 1:
+        turn = 'X'
+    else:
+        turn = 'O'
+    return turn
 
 playGame()
